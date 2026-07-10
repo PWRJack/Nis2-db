@@ -1,3 +1,0 @@
-data_ora,codice_inventario,asset,tipo_asset,campo_modificato,valore_precedente,valore_nuovo,modificato_da,motivo
-01/05/2024 02:00,INV-BM-001,Core Banking Server Primario,Server fisico on-premise,stato,in_manutenzione,attivo,sistema_automatico,Fine upgrade IBM z/OS 3.1: applicazione PTF sicurezza critica UA99967
-15/01/2024 09:00,INV-BM-003,Sistema PSD2 Open Banking,"Applicazione software (web, desktop, mobile)",categoria,importante,critico,e.gallo@bancametro.it,Reclassificazione post-assessment PSD2: sistema ora in scope diretto NIS2

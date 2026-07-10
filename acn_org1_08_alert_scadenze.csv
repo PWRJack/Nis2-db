@@ -1,4 +1,0 @@
-priorita,fornitore,tipo_fornitore,fornitore_critico,numero_contratto,oggetto,data_inizio,data_scadenza,giorni_residui,sla_percent,clausole_sicurezza,valore_annuo_eur,n_dipendenze_associate,criticita_dipendenze,risorse_coinvolte
-SCADUTO,IndustrialSoft S.r.l.,sw_vendor,Si,CTR-AE-2024-002,Manutenzione correttiva ed evolutiva piattaforma SCADA IndustrialSoft v6,01/03/2024,28/02/2025,-497,99.50,Si,95000.00,2,"alta, critica",DB Telemetria SCADA | Monitoraggio SCADA
-SCADUTO,TelecomITA S.p.A.,tlc,No,CTR-AE-2022-003,ConnettivitÃ  WAN dedicata MPLS tra Sede Centrale e Data Center Nord,01/01/2022,31/12/2025,-191,99.90,No,48000.00,1,alta,Distribuzione Energia Elettrica
-ATTENZIONE (entro 180gg),Microsoft Azure Corp.,cloud,Si,CTR-AE-2024-001,Microsoft Azure IaaS/PaaS per infrastruttura SCADA cloud-hybrid,01/01/2024,31/12/2026,174,99.95,Si,180000.00,1,alta,SCADA Server Primario

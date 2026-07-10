@@ -1,2 +1,0 @@
-priorita,fornitore,tipo_fornitore,fornitore_critico,numero_contratto,oggetto,data_inizio,data_scadenza,giorni_residui,sla_percent,clausole_sicurezza,valore_annuo_eur,n_dipendenze_associate,criticita_dipendenze,risorse_coinvolte
-SCADUTO,Amazon Web Services EMEA S.r.l.,cloud,Si,CTR-BC-2023-002,Amazon Web Services EMEA â€” backup georedondante su AWS eu-south-1,01/01/2023,31/12/2025,-191,99.95,Si,86000.00,1,media,Storage Dati Clienti S3

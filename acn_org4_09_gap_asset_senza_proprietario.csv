@@ -1,4 +1,0 @@
-tipo_gap,codice_inventario,asset,tipo_asset,categoria,stato,sede,citta,stato_copertura,inserito_il
-GAP - Nessun proprietario,INV-TL-002,Sistema GPS Fleet Tracking,"Applicazione software (web, desktop, mobile)",critico,attivo,Sede Operativa Bologna,Bologna,Ha altri ruoli assegnati,02/07/2026
-GAP - Nessun proprietario,INV-TL-003,DB WMS Magazzino,DBMS / sistema di gestione database,importante,attivo,Sede Operativa Bologna,Bologna,Nessun referente,02/07/2026
-GAP - Nessun proprietario,INV-TL-004,Rete Operativa Hub Bologna,"Apparato di rete (switch, router, firewall, IPS)",importante,attivo,Hub Intermodale Nord,Segrate,Nessun referente,02/07/2026

@@ -1,0 +1,6 @@
+riferimento_normativo,categoria,misura,stato_implementazione,data_implementazione,prossima_verifica,ambito_applicazione,semaforo
+Art.21.2.c,continuita_operativa,BCP continuitÃ  tracking flotta: failover su cluster secondario Hub Nord,implementata,01/09/2023,01/03/2024,Servizio: Tracking Flotta e Spedizioni,Verde
+Art.21.2.a,controllo_accessi,MFA per accesso VPN operatori flotta e sistema gestione Fleet,in_corso,,,Asset: Server Gestione Flotta,Giallo
+Art.21.2.h,vulnerability_management,Patch management automatizzato WSUS per endpoint e server Windows,in_corso,,,Organizzazione,Giallo
+Art.21.2.b,incident_response,Procedure gestione incidenti informatici â€” documento in fase di redazione,pianificata,,,Organizzazione,Arancione
+Art.21.2.d,supply_chain,Revisione clausole di sicurezza nei contratti SAP WM e connettivitÃ ,pianificata,,,Servizio: Gestione Magazzino WMS,Arancione

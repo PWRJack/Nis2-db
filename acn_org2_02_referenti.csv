@@ -1,0 +1,4 @@
+nominativo,email,telefono,ruolo,referente_acn_ufficiale,organizzazione,pec_organizzazione
+Verdi Lorenzo,l.verdi@betacloud.it,+39 06 9876 4001,Referente_ACN,Si,BetaCloud S.r.l.,betacloud@legalmail.it
+Colombo Sara,s.colombo@betacloud.it,+39 06 9876 4002,CISO,No,BetaCloud S.r.l.,betacloud@legalmail.it
+Ricci Matteo,m.ricci@betacloud.it,+39 06 9876 4003,CTO,No,BetaCloud S.r.l.,betacloud@legalmail.it

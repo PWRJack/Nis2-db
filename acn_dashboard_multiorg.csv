@@ -1,0 +1,6 @@
+org_id,organizzazione,settore_nis2,categoria_nis2,asset_critici,asset_importanti,servizi_alta_crit,dip_critiche,fornitori_critici,perc_misure_implementate,contratti_scadenza_180gg,stato_profilo,email_referente_acn
+5,BancaMetro S.p.A.,Bancario,essenziale,5,1,3,5,2,100.0,1,inviato,g.mancini@bancametro.it
+1,Alfa Energia S.p.A.,Energia,essenziale,3,2,2,4,2,60.0,1,bozza,marco.rossi@alfa-energia.it
+3,Ospedale Regionale Nord,SanitÃ ,essenziale,4,2,2,4,1,80.0,0,approvato,f.moretti@ospedaleregionale.it
+4,TransLogistica S.p.A.,Trasporti,essenziale,2,2,2,2,0,20.0,0,da_aggiornare,v.romano@translogistica.it
+2,BetaCloud S.r.l.,Infrastrutture digitali,importante,4,1,2,3,2,80.0,0,bozza,l.verdi@betacloud.it

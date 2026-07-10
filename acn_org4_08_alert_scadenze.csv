@@ -1,0 +1,3 @@
+priorita,fornitore,tipo_fornitore,fornitore_critico,numero_contratto,oggetto,data_inizio,data_scadenza,giorni_residui,sla_percent,clausole_sicurezza,valore_annuo_eur,n_dipendenze_associate,criticita_dipendenze,risorse_coinvolte
+SCADUTO,ConnectFiber S.p.A.,tlc,No,CTR-TL-2022-002,ConnettivitÃ  ConnectFiber: fibra dedicata e connessioni hub intermodale,01/01/2022,31/12/2025,-191,99.80,No,28000.00,1,alta,Tracking Flotta e Spedizioni
+SCADUTO,SAP Italia S.r.l.,sw_vendor,No,CTR-TL-2023-001,Licenze SAP WM e supporto applicativo per sistema WMS logistico,01/04/2023,31/03/2026,-101,99.00,No,145000.00,2,"alta, media",Gestione Magazzino WMS | Sistema GPS Fleet Tracking

@@ -1,0 +1,4 @@
+nominativo,email,telefono,ruolo,referente_acn_ufficiale,organizzazione,pec_organizzazione
+Rossi Marco,marco.rossi@alfa-energia.it,+39 02 1234 5001,CISO,Si,Alfa Energia S.p.A.,alfa-energia@pec.it
+Bianchi Giulia,giulia.bianchi@alfa-energia.it,+39 02 1234 5002,Referente_NIS2,No,Alfa Energia S.p.A.,alfa-energia@pec.it
+Ferrari Paolo,paolo.ferrari@alfa-energia.it,+39 02 1234 5003,Admin_Sistema,No,Alfa Energia S.p.A.,alfa-energia@pec.it

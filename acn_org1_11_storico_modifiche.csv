@@ -1,0 +1,4 @@
+data_ora,codice_inventario,asset,tipo_asset,campo_modificato,valore_precedente,valore_nuovo,modificato_da,motivo
+01/03/2024 10:00,INV-AE-005,Portale Clienti Online,"Applicazione software (web, desktop, mobile)",nome,Portale Clienti,Portale Clienti Online,giulia.bianchi@alfa-energia.it,Allineamento nomenclatura agli standard di inventario NIS2
+10/01/2024 05:30,INV-AE-001,SCADA Server Primario,Server fisico on-premise,stato,in_manutenzione,attivo,sistema_automatico,Fine manutenzione programmata: sostituzione disco RAID completata
+15/08/2023 07:12,INV-AE-002,PLC Controllo Rete Gas,Sistema OT / ICS / SCADA / PLC,categoria,importante,critico,marco.rossi@alfa-energia.it,Rivalutazione rischio post-analisi OT: impatto elevato su infrastruttura critica

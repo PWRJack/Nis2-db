@@ -1,4 +1,0 @@
-nome_servizio,tipo_servizio,criticita,stato,rto_ore,rpo_ore,classe_disponibilita,url_servizio,n_asset_supportanti,asset_supportanti,proprietario,email_proprietario,n_dipendenze_critiche_fornitore
-Gestione Cartelle Cliniche Elettroniche,essenziale,alta,attivo,4,1,Missione critica,,3,CCE â€” Cartella Clinica Elettronica | DB Pazienti e Cartelle Cliniche | Server HIS â€” Hospital Info System,Moretti Francesca,f.moretti@ospedaleregionale.it,2
-Servizi Radiologia Digitale PACS,essenziale,alta,attivo,8,2,Business critical,,1,Server PACS Radiologia,Moretti Francesca,f.moretti@ospedaleregionale.it,1
-Prenotazione Online Prestazioni,digitale,media,attivo,24,12,Business critical,https://prenotazioni.ospedaleregionale.it,0,,,,0

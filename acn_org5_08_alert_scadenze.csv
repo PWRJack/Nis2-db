@@ -1,3 +1,0 @@
-priorita,fornitore,tipo_fornitore,fornitore_critico,numero_contratto,oggetto,data_inizio,data_scadenza,giorni_residui,sla_percent,clausole_sicurezza,valore_annuo_eur,n_dipendenze_associate,criticita_dipendenze,risorse_coinvolte
-SCADUTO,SWIFT scrl,sw_vendor,Si,CTR-BM-2020-002,SWIFT Alliance Access: licenze di connessione alla rete interbancaria globale,01/01/2020,31/12/2025,-192,99.99,Si,220000.00,1,critica,Rete SWIFT Interbancaria
-ATTENZIONE (entro 180gg),IBM Italia S.p.A.,sw_vendor,Si,CTR-BM-2023-001,"IBM: manutenzione mainframe z16, licenze z/OS 3.1 e Db2 12.1, supporto 24/7",01/01/2023,31/12/2026,173,100.00,Si,980000.00,3,critica,Core Banking e Transazioni | Core Banking Server Primario | DB Transazioni OLTP

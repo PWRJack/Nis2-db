@@ -1,0 +1,3 @@
+data_ora,codice_inventario,asset,tipo_asset,campo_modificato,valore_precedente,valore_nuovo,modificato_da,motivo
+20/02/2024 07:00,INV-OR-001,Server HIS â€” Hospital Info System,Server fisico on-premise,versione_sw,Meditech Expanse 1.9,Meditech Expanse 2.1,andrea.conti@ospedaleregionale.it,Aggiornamento pianificato al ciclo di release SierraSW Q1 2024
+01/11/2023 13:30,INV-OR-003,DB Pazienti e Cartelle Cliniche,DBMS / sistema di gestione database,categoria,importante,critico,l.fontana@ospedaleregionale.it,DPIA ex Art.35 GDPR: dati pazienti riclassificati critici ai fini NIS2

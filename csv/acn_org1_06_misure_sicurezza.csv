@@ -1,0 +1,6 @@
+riferimento_normativo,categoria,misura,stato_implementazione,data_implementazione,prossima_verifica,ambito_applicazione,semaforo
+Art.21.2.a,controllo_accessi,MFA su tutti gli accessi alla console SCADA,implementata,15/01/2024,15/07/2024,Asset: SCADA Server Primario,Verde
+Art.21.2.i,crittografia,Cifratura AES-256 del DB Telemetria SCADA at-rest,implementata,01/02/2024,,Asset: DB Telemetria SCADA,Verde
+Art.21.2.b,incident_response,Piano risposta incidenti ICS/OT v2.1 (conforme IEC 62443),implementata,01/10/2023,01/04/2024,Servizio: Distribuzione Energia Elettrica,Verde
+Art.21.2.d,supply_chain,Audit annuale sicurezza fornitori critici SCADA (IndustrialSoft),in_corso,,,Organizzazione,Giallo
+Art.21.2.c,continuita_operativa,BCP settore energia â€” test semestrale DRP con simulazione black-out,pianificata,,,Servizio: Distribuzione Energia Elettrica,Arancione

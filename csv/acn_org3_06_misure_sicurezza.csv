@@ -1,0 +1,6 @@
+riferimento_normativo,categoria,misura,stato_implementazione,data_implementazione,prossima_verifica,ambito_applicazione,semaforo
+Art.21.2.a,controllo_accessi,Smart card + PIN per accesso CCE da tutti i reparti,implementata,01/04/2024,,Asset: CCE â€” Cartella Clinica Elettronica,Verde
+Art.21.2.i,crittografia,TDE AES-256 su DB Oracle: cifratura dati pazienti at-rest,implementata,01/01/2024,01/07/2024,Asset: DB Pazienti e Cartelle Cliniche,Verde
+Art.21.2.g,governance,Nomina CISO e approvazione Policy di Sicurezza ICT v1.0 da parte del CdA,implementata,01/06/2023,,Organizzazione,Verde
+Art.21.2.b,incident_response,Piano risposta incidenti allineato CERT-PA SanitÃ : procedure escalation H24,implementata,01/12/2023,01/06/2024,Servizio: Gestione Cartelle Cliniche Elettroniche,Verde
+Art.21.2.d,supply_chain,Inserimento clausole NIS2 nel rinnovo contratto SierraSW (PACS e HIS),in_corso,,,Servizio: Servizi Radiologia Digitale PACS,Giallo

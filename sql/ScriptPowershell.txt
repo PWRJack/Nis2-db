@@ -1,0 +1,17 @@
+Inizializzare db:
+& "C:\Program Files\PostgreSQL\18\bin\createdb.exe" -U postgres nis2db
+
+Creazione schema dati db:
+& "C:\Program Files\PostgreSQL\18\bin\psql.exe" -U postgres -d nis2db -f nis2_schema.sql
+
+Popolazione db:
+& "C:\Program Files\PostgreSQL\18\bin\psql.exe" -U postgres -d nis2db -f nis2_testdata.sql
+
+Export dati db in csv (eseguire da cartella "csv", versione con separatore ','):
+& "C:\Program Files\PostgreSQL\18\bin\psql.exe" -U postgres -d nis2db -f ..\sql\nis2_export_csv.sql
+
+
+OPTIONAL
+
+Export dati db in csv (eseguire da cartella "csv", versione con separatore ';'):
+& "C:\Program Files\PostgreSQL\18\bin\psql.exe" -U postgres -d nis2db -f ..\sql\nis2_export_csv_excel.sql

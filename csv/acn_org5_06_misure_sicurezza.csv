@@ -1,0 +1,6 @@
+riferimento_normativo,categoria,misura,stato_implementazione,data_implementazione,prossima_verifica,ambito_applicazione,semaforo
+Art.21.2.a,controllo_accessi,PAM CyberArk per gestione accessi privilegiati a mainframe e sistemi core,implementata,01/02/2024,01/08/2024,Asset: Core Banking Server Primario,Verde
+Art.21.2.i,crittografia,Cifratura E2E di tutte le transazioni con HSM nShield: firma e verifica HMAC,implementata,01/01/2023,01/01/2024,Servizio: Core Banking e Transazioni,Verde
+Art.21.2.f,gestione_rischi,Framework ERM integrato Basel III + NIS2: risk appetite e quarterly risk review,implementata,01/03/2023,01/03/2024,Organizzazione,Verde
+Art.21.2.b,incident_response,SOC bancario H24 con CSIRT dedicato e gestione incidenti DORA-compliant,implementata,01/06/2022,01/06/2024,Servizio: Core Banking e Transazioni,Verde
+Art.21.2.d,supply_chain,"Due diligence annuale fornitori critici (IBM, SWIFT): audit on-site e questionari",implementata,01/01/2024,01/01/2025,Organizzazione,Verde

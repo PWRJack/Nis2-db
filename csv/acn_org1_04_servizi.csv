@@ -1,0 +1,4 @@
+nome_servizio,tipo_servizio,criticita,stato,rto_ore,rpo_ore,classe_disponibilita,url_servizio,n_asset_supportanti,asset_supportanti,proprietario,email_proprietario,n_dipendenze_critiche_fornitore
+Distribuzione Energia Elettrica,essenziale,alta,attivo,4,1,Missione critica,,2,DB Telemetria SCADA | SCADA Server Primario,,,1
+Monitoraggio SCADA,essenziale,alta,attivo,2,0,Missione critica,,3,DB Telemetria SCADA | PLC Controllo Rete Gas | SCADA Server Primario,,,1
+Portale Clienti Online,digitale,media,attivo,24,4,Business critical,https://clienti.alfa-energia.it,1,Portale Clienti Online,,,0

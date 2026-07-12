@@ -1,0 +1,2 @@
+data_ora,codice_inventario,asset,tipo_asset,campo_modificato,valore_precedente,valore_nuovo,modificato_da,motivo
+10/06/2024 07:30,INV-TL-002,Sistema GPS Fleet Tracking,"Applicazione software (web, desktop, mobile)",versione_sw,FleetMaster GPS 2.8,FleetMaster GPS 3.1,r.esposito@translogistica.it,Aggiornamento per supporto nuovo formato telematico ADR 2025

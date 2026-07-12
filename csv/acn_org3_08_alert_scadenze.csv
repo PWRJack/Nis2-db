@@ -1,0 +1,3 @@
+priorita,fornitore,tipo_fornitore,fornitore_critico,numero_contratto,oggetto,data_inizio,data_scadenza,giorni_residui,sla_percent,clausole_sicurezza,valore_annuo_eur,n_dipendenze_associate,criticita_dipendenze,risorse_coinvolte
+SCADUTO,TelecomITA S.p.A.,tlc,No,CTR-OR-2021-002,Fibra dedicata TelecomITA: CED ospedaliero â†’ rete GARR e WAN interospedaliera,01/01/2021,31/12/2025,-193,99.50,No,36000.00,1,alta,Gestione Cartelle Cliniche Elettroniche
+SCADUTO,SierraSW Healthcare S.p.A.,sw_vendor,Si,CTR-OR-2023-001,"Licenze, manutenzione e supporto H24 Meditech Expanse (HIS + PACS + CCE)",01/06/2023,31/05/2026,-42,99.00,Si,310000.00,3,"alta, critica",Gestione Cartelle Cliniche Elettroniche | Server HIS â€” Hospital Info System | Servizi Radiologia Digitale PACS

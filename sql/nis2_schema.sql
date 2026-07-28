@@ -25,9 +25,12 @@
 
 
 -- ============================================================
--- SEZIONE 1 — LOOKUP: TIPO_ASSET
+-- SEZIONE 1 — LOOKUP (tabelle di riferimento)
 -- ============================================================
 
+-- ------------------------------------------------------------
+-- 1.1  TIPO_ASSET
+-- ------------------------------------------------------------
 CREATE TABLE tipo_asset (
     codice         VARCHAR(30)  PRIMARY KEY,
     descrizione    VARCHAR(150) NOT NULL,
@@ -49,6 +52,59 @@ INSERT INTO tipo_asset (codice, descrizione, categoria_nis2) VALUES
     ('OT_ICS',          'Sistema OT / ICS / SCADA / PLC',                  'OT'),
     ('DATO',            'Dataset, archivio dati, Data Warehouse',           'Dato'),
     ('FISICO',          'Asset fisico (edificio, generatore, UPS, ecc.)',   'Fisico');
+
+
+-- ------------------------------------------------------------
+-- 1.2  FRAMEWORK_SUBCATEGORY  (Core del Framework Nazionale, Ed. 2025 v2.1)
+-- ------------------------------------------------------------
+CREATE TABLE framework_subcategory (
+    codice         VARCHAR(15)  PRIMARY KEY,        -- es. 'ID.AM-01'
+    funzione       CHAR(2)      NOT NULL
+                     CHECK (funzione IN ('GV','ID','PR','DE','RS','RC')),
+    funzione_nome  VARCHAR(20)  NOT NULL,
+    categoria_cod  VARCHAR(10)  NOT NULL,           -- es. 'ID.AM'
+    categoria_nome VARCHAR(120) NOT NULL,
+    descrizione    TEXT         NOT NULL
+);
+
+COMMENT ON TABLE framework_subcategory IS
+    'Lookup delle Subcategory del Framework Nazionale per la Cybersecurity e la Data Protection (Core, Ed. 2025 v2.1), usato come FK da assessment e misura_sicurezza.';
+
+INSERT INTO framework_subcategory (codice, funzione, funzione_nome, categoria_cod, categoria_nome, descrizione) VALUES
+  ('GV.OC-01', 'GV', 'Governare', 'GV.OC', 'Contesto organizzativo',
+   'La missione dell''organizzazione è compresa e informa la gestione del rischio di cybersecurity.'),
+  ('GV.RM-01', 'GV', 'Governare', 'GV.RM', 'Strategia di gestione del rischio',
+   'Gli obiettivi di gestione del rischio sono stabiliti e accettati dagli stakeholder dell''organizzazione.'),
+  ('GV.RR-02', 'GV', 'Governare', 'GV.RR', 'Ruoli, responsabilità e correlati poteri',
+   'I ruoli, le responsabilità e i correlati poteri relativi alla gestione del rischio di cybersecurity sono stabiliti, comunicati, compresi e applicati.'),
+  ('GV.SC-04', 'GV', 'Governare', 'GV.SC', 'Gestione del rischio di cybersecurity della catena di approvvigionamento',
+   'I fornitori sono noti e prioritizzati in base alla criticità.'),
+  ('ID.AM-01', 'ID', 'Identificare', 'ID.AM', 'Gestione degli asset',
+   'Sono mantenuti gli inventari dell''hardware gestito dall''organizzazione.'),
+  ('ID.AM-04', 'ID', 'Identificare', 'ID.AM', 'Gestione degli asset',
+   'Sono mantenuti gli inventari dei servizi erogati dai fornitori.'),
+  ('ID.RA-01', 'ID', 'Identificare', 'ID.RA', 'Valutazione del rischio (Risk Assessment)',
+   'Le vulnerabilità negli asset sono identificate, confermate e registrate.'),
+  ('ID.RA-05', 'ID', 'Identificare', 'ID.RA', 'Valutazione del rischio (Risk Assessment)',
+   'Minacce, vulnerabilità, probabilità e impatti sono utilizzati per comprendere il rischio inerente e per informare la prioritizzazione della risposta al rischio.'),
+  ('PR.AA-01', 'PR', 'Proteggere', 'PR.AA', 'Gestione delle identità, autenticazione e controllo degli accessi',
+   'Le identità e le credenziali degli utenti, dei servizi e dell''hardware autorizzati sono gestite dall''organizzazione.'),
+  ('PR.AA-05', 'PR', 'Proteggere', 'PR.AA', 'Gestione delle identità, autenticazione e controllo degli accessi',
+   'I permessi, i diritti e le autorizzazioni di accesso sono definiti in una politica, gestiti, applicati e rivisti e incorporano i principi del minimo privilegio e della separazione dei compiti.'),
+  ('PR.DS-01', 'PR', 'Proteggere', 'PR.DS', 'Sicurezza dei dati',
+   'La riservatezza, l''integrità e la disponibilità dei dati a riposo (data-at-rest) sono protette.'),
+  ('PR.IR-01', 'PR', 'Proteggere', 'PR.IR', 'Resilienza dell''infrastruttura tecnologica',
+   'Le reti e gli ambienti sono protetti dall''accesso logico e dall''uso non autorizzati.'),
+  ('DE.CM-01', 'DE', 'Rilevare', 'DE.CM', 'Monitoraggio continuo',
+   'Le reti e i servizi di rete sono monitorati per individuare eventi potenzialmente avversi.'),
+  ('DE.CM-09', 'DE', 'Rilevare', 'DE.CM', 'Monitoraggio continuo',
+   'L''hardware e il software di elaborazione, gli ambienti di runtime e i loro dati sono monitorati per individuare eventi potenzialmente avversi.'),
+  ('RS.MA-01', 'RS', 'Rispondere', 'RS.MA', 'Gestione degli incidenti',
+   'Il piano di risposta agli incidenti è eseguito in coordinamento con le terze parti interessate una volta dichiarato un incidente.'),
+  ('RS.CO-02', 'RS', 'Rispondere', 'RS.CO', 'Segnalazione e comunicazione della risposta agli incidenti',
+   'Gli stakeholder interni ed esterni sono informati degli incidenti.'),
+  ('RC.RP-01', 'RC', 'Ripristinare', 'RC.RP', 'Esecuzione del piano di ripristino dagli incidenti',
+   'La parte del piano di risposta agli incidenti relativa al rispristino viene eseguita una volta avviata dal processo di risposta agli incidenti.');
 
 
 -- ============================================================
@@ -389,6 +445,7 @@ CREATE TABLE misura_sicurezza (
     organizzazione_id     INT         NOT NULL REFERENCES organizzazione (id) ON DELETE CASCADE,
     asset_id              INT                  REFERENCES asset    (id) ON DELETE SET NULL,
     servizio_id           INT                  REFERENCES servizio (id) ON DELETE SET NULL,
+    subcategory_cod       VARCHAR(15)          REFERENCES framework_subcategory (codice),
     articolo_nis2         VARCHAR(20),          -- es. 'Art.21.2.a'
     categoria             VARCHAR(40) NOT NULL
                             CHECK (categoria IN (
@@ -412,7 +469,8 @@ COMMENT ON COLUMN misura_sicurezza.articolo_nis2 IS
     'Riferimento al comma NIS2: Art.21.2.a = MFA, .b = incident response, .i = crittografia, ecc.';
 
 CREATE INDEX idx_misura_org   ON misura_sicurezza (organizzazione_id);
-CREATE INDEX idx_misura_stato ON misura_sicurezza (stato_implementazione);
+CREATE INDEX idx_misura_stato       ON misura_sicurezza (stato_implementazione);
+CREATE INDEX idx_misura_subcategory ON misura_sicurezza (subcategory_cod);
 
 
 -- ------------------------------------------------------------
@@ -434,6 +492,32 @@ COMMENT ON TABLE profilo_acn IS
     'Snapshot del profilo ACN. Ogni nuovo invio crea una riga con versione incrementale.';
 
 CREATE INDEX idx_profilo_org ON profilo_acn (organizzazione_id);
+
+
+-- ------------------------------------------------------------
+-- 4.4  ASSESSMENT  (profilo target/attuale — metodologia FNCSDP)
+-- ------------------------------------------------------------
+CREATE TABLE assessment (
+    id                SERIAL      PRIMARY KEY,
+    organizzazione_id INT         NOT NULL REFERENCES organizzazione (id) ON DELETE CASCADE,
+    subcategory_cod   VARCHAR(15) NOT NULL REFERENCES framework_subcategory (codice),
+    priorita          VARCHAR(6)  NOT NULL DEFAULT 'media'
+                        CHECK (priorita IN ('alta','media','bassa')),
+    -- Scala 0-4: 0=assente, 1=iniziale, 2=parziale, 3=strutturato, 4=ottimizzato
+    livello_target    SMALLINT    NOT NULL CHECK (livello_target   BETWEEN 0 AND 4),
+    livello_attuale   SMALLINT    NOT NULL CHECK (livello_attuale  BETWEEN 0 AND 4),
+    livello_maturita  SMALLINT             CHECK (livello_maturita BETWEEN 0 AND 4),
+    data_valutazione  DATE        NOT NULL DEFAULT CURRENT_DATE,
+    note              TEXT,
+    CONSTRAINT uq_assessment_org_sub UNIQUE (organizzazione_id, subcategory_cod)
+);
+
+COMMENT ON TABLE assessment IS
+    'Valutazione per Subcategory: profilo target (livello desiderato) e profilo attuale (livello rilevato). Il gap = livello_target - livello_attuale definisce la roadmap di intervento.';
+
+CREATE INDEX idx_assessment_org      ON assessment (organizzazione_id);
+CREATE INDEX idx_assessment_sub      ON assessment (subcategory_cod);
+CREATE INDEX idx_assessment_priorita ON assessment (priorita);
 
 
 -- ============================================================
@@ -723,11 +807,72 @@ COMMENT ON VIEW v_profilo_acn_export IS
     'Quadro riepilogativo NIS2: una riga per organizzazione con tutti i contatori chiave.';
 
 
+-- ------------------------------------------------------------
+-- 7.6  v_profilo_target
+--      Profilo target (stato desiderato, "to be") per Subcategory.
+-- ------------------------------------------------------------
+CREATE OR REPLACE VIEW v_profilo_target AS
+SELECT o.nome AS organizzazione, fs.funzione, fs.funzione_nome,
+       a.subcategory_cod, fs.categoria_nome, fs.descrizione,
+       a.priorita, a.livello_target
+FROM assessment a
+JOIN organizzazione o         ON o.id = a.organizzazione_id
+JOIN framework_subcategory fs ON fs.codice = a.subcategory_cod
+ORDER BY o.nome, a.subcategory_cod;
+
+-- ------------------------------------------------------------
+-- 7.7  v_profilo_attuale
+--      Profilo attuale (stato corrente, "as is") rilevato in assessment.
+-- ------------------------------------------------------------
+CREATE OR REPLACE VIEW v_profilo_attuale AS
+SELECT o.nome AS organizzazione, fs.funzione, fs.funzione_nome,
+       a.subcategory_cod, fs.categoria_nome, fs.descrizione,
+       a.livello_attuale, a.livello_maturita, a.data_valutazione
+FROM assessment a
+JOIN organizzazione o         ON o.id = a.organizzazione_id
+JOIN framework_subcategory fs ON fs.codice = a.subcategory_cod
+ORDER BY o.nome, a.subcategory_cod;
+
+-- ------------------------------------------------------------
+-- 7.8  v_gap_analysis
+--      Distanza target-attuale, ordinata per priorita' e gap (roadmap).
+-- ------------------------------------------------------------
+CREATE OR REPLACE VIEW v_gap_analysis AS
+SELECT o.nome AS organizzazione, fs.funzione, a.subcategory_cod, fs.descrizione,
+       a.priorita, a.livello_target, a.livello_attuale,
+       (a.livello_target - a.livello_attuale) AS gap,
+       CASE WHEN a.livello_attuale >= a.livello_target THEN 'Raggiunto'
+            ELSE 'Da colmare' END AS stato
+FROM assessment a
+JOIN organizzazione o         ON o.id = a.organizzazione_id
+JOIN framework_subcategory fs ON fs.codice = a.subcategory_cod
+ORDER BY o.nome,
+         CASE a.priorita WHEN 'alta' THEN 1 WHEN 'media' THEN 2 ELSE 3 END,
+         (a.livello_target - a.livello_attuale) DESC;
+
+-- ------------------------------------------------------------
+-- 7.9  v_gap_dashboard
+--      Sintesi per organizzazione: subcategory raggiunte, gap, completamento.
+-- ------------------------------------------------------------
+CREATE OR REPLACE VIEW v_gap_dashboard AS
+SELECT o.nome AS organizzazione, o.settore_nis2,
+       COUNT(*) AS subcategory_valutate,
+       COUNT(*) FILTER (WHERE a.livello_attuale >= a.livello_target) AS raggiunte,
+       COUNT(*) FILTER (WHERE a.livello_attuale <  a.livello_target) AS da_colmare,
+       COUNT(*) FILTER (WHERE a.livello_attuale <  a.livello_target AND a.priorita='alta') AS gap_priorita_alta,
+       ROUND(AVG(a.livello_target - a.livello_attuale), 2) AS gap_medio,
+       ROUND(100.0 * SUM(a.livello_attuale) / NULLIF(SUM(a.livello_target),0), 1) AS completamento_perc
+FROM assessment a
+JOIN organizzazione o ON o.id = a.organizzazione_id
+GROUP BY o.nome, o.settore_nis2
+ORDER BY completamento_perc DESC;
+
+
 -- ============================================================
 -- SEZIONE 8 — DATI
 -- ============================================================
 -- Questo file contiene SOLO la struttura (DDL) e i dati di
--- riferimento statici (tabella tipo_asset, Sezione 1).
+-- riferimento statici (tabelle tipo_asset e framework_subcategory, Sezione 1).
 --
 -- I dati dimostrativi di business (organizzazioni, asset, servizi,
 -- dipendenze, ecc.) sono mantenuti separati nel file:

@@ -24,16 +24,16 @@ BEGIN;
 -- PULIZIA — svuota le tabelle e azzera le sequenze
 -- ============================================================
 TRUNCATE TABLE
-    profilo_acn, misura_sicurezza, asset_storico,
+    assessment, profilo_acn, misura_sicurezza, asset_storico,
     responsabilita, dipendenza, contratto, asset_servizio,
     servizio, asset,
     persona, fornitore,
-    sede, organizzazione, tipo_asset
+    sede, organizzazione, tipo_asset, framework_subcategory
 RESTART IDENTITY CASCADE;
 
 
 -- ============================================================
--- SEZIONE 1 — TIPO_ASSET  (lookup, PK testuale)
+-- SEZIONE 1.1 — TIPO_ASSET  (lookup, PK testuale)
 -- ============================================================
 INSERT INTO tipo_asset (codice, descrizione, categoria_nis2) VALUES
     ('SERVER_FISICO',   'Server fisico on-premise',                         'Infrastruttura ICT'),
@@ -46,6 +46,46 @@ INSERT INTO tipo_asset (codice, descrizione, categoria_nis2) VALUES
     ('OT_ICS',          'Sistema OT / ICS / SCADA / PLC',                  'OT'),
     ('DATO',            'Dataset, archivio dati, Data Warehouse',           'Dato'),
     ('FISICO',          'Asset fisico (edificio, generatore, UPS, ecc.)',   'Fisico');
+
+
+-- ============================================================
+-- SEZIONE 1.2 — FRAMEWORK_SUBCATEGORY  (lookup Core FNCSDP, PK testuale)
+-- ============================================================
+INSERT INTO framework_subcategory (codice, funzione, funzione_nome, categoria_cod, categoria_nome, descrizione) VALUES
+  ('GV.OC-01', 'GV', 'Governare', 'GV.OC', 'Contesto organizzativo',
+   'La missione dell''organizzazione è compresa e informa la gestione del rischio di cybersecurity.'),
+  ('GV.RM-01', 'GV', 'Governare', 'GV.RM', 'Strategia di gestione del rischio',
+   'Gli obiettivi di gestione del rischio sono stabiliti e accettati dagli stakeholder dell''organizzazione.'),
+  ('GV.RR-02', 'GV', 'Governare', 'GV.RR', 'Ruoli, responsabilità e correlati poteri',
+   'I ruoli, le responsabilità e i correlati poteri relativi alla gestione del rischio di cybersecurity sono stabiliti, comunicati, compresi e applicati.'),
+  ('GV.SC-04', 'GV', 'Governare', 'GV.SC', 'Gestione del rischio di cybersecurity della catena di approvvigionamento',
+   'I fornitori sono noti e prioritizzati in base alla criticità.'),
+  ('ID.AM-01', 'ID', 'Identificare', 'ID.AM', 'Gestione degli asset',
+   'Sono mantenuti gli inventari dell''hardware gestito dall''organizzazione.'),
+  ('ID.AM-04', 'ID', 'Identificare', 'ID.AM', 'Gestione degli asset',
+   'Sono mantenuti gli inventari dei servizi erogati dai fornitori.'),
+  ('ID.RA-01', 'ID', 'Identificare', 'ID.RA', 'Valutazione del rischio (Risk Assessment)',
+   'Le vulnerabilità negli asset sono identificate, confermate e registrate.'),
+  ('ID.RA-05', 'ID', 'Identificare', 'ID.RA', 'Valutazione del rischio (Risk Assessment)',
+   'Minacce, vulnerabilità, probabilità e impatti sono utilizzati per comprendere il rischio inerente e per informare la prioritizzazione della risposta al rischio.'),
+  ('PR.AA-01', 'PR', 'Proteggere', 'PR.AA', 'Gestione delle identità, autenticazione e controllo degli accessi',
+   'Le identità e le credenziali degli utenti, dei servizi e dell''hardware autorizzati sono gestite dall''organizzazione.'),
+  ('PR.AA-05', 'PR', 'Proteggere', 'PR.AA', 'Gestione delle identità, autenticazione e controllo degli accessi',
+   'I permessi, i diritti e le autorizzazioni di accesso sono definiti in una politica, gestiti, applicati e rivisti e incorporano i principi del minimo privilegio e della separazione dei compiti.'),
+  ('PR.DS-01', 'PR', 'Proteggere', 'PR.DS', 'Sicurezza dei dati',
+   'La riservatezza, l''integrità e la disponibilità dei dati a riposo (data-at-rest) sono protette.'),
+  ('PR.IR-01', 'PR', 'Proteggere', 'PR.IR', 'Resilienza dell''infrastruttura tecnologica',
+   'Le reti e gli ambienti sono protetti dall''accesso logico e dall''uso non autorizzati.'),
+  ('DE.CM-01', 'DE', 'Rilevare', 'DE.CM', 'Monitoraggio continuo',
+   'Le reti e i servizi di rete sono monitorati per individuare eventi potenzialmente avversi.'),
+  ('DE.CM-09', 'DE', 'Rilevare', 'DE.CM', 'Monitoraggio continuo',
+   'L''hardware e il software di elaborazione, gli ambienti di runtime e i loro dati sono monitorati per individuare eventi potenzialmente avversi.'),
+  ('RS.MA-01', 'RS', 'Rispondere', 'RS.MA', 'Gestione degli incidenti',
+   'Il piano di risposta agli incidenti è eseguito in coordinamento con le terze parti interessate una volta dichiarato un incidente.'),
+  ('RS.CO-02', 'RS', 'Rispondere', 'RS.CO', 'Segnalazione e comunicazione della risposta agli incidenti',
+   'Gli stakeholder interni ed esterni sono informati degli incidenti.'),
+  ('RC.RP-01', 'RC', 'Ripristinare', 'RC.RP', 'Esecuzione del piano di ripristino dagli incidenti',
+   'La parte del piano di risposta agli incidenti relativa al rispristino viene eseguita una volta avviata dal processo di risposta agli incidenti.');
 
 
 -- ============================================================
@@ -767,6 +807,104 @@ VALUES
 
 
 -- ============================================================
+-- SEZIONE — ASSESSMENT FNCSDP (profilo target/attuale per Subcategory)
+-- ============================================================
+
+-- Aggancio di ciascuna misura alla Subcategory del Core che contribuisce a soddisfare
+UPDATE misura_sicurezza SET subcategory_cod =
+    CASE categoria WHEN 'governance' THEN 'GV.OC-01' WHEN 'gestione_rischi' THEN 'ID.RA-05' WHEN 'incident_response' THEN 'RS.MA-01' WHEN 'continuita_operativa' THEN 'RC.RP-01' WHEN 'supply_chain' THEN 'GV.SC-04' WHEN 'crittografia' THEN 'PR.DS-01' WHEN 'controllo_accessi' THEN 'PR.AA-01' WHEN 'vulnerability_management' THEN 'ID.RA-01' ELSE NULL END
+WHERE subcategory_cod IS NULL;
+
+-- Valutazioni: livello target (profilo desiderato) e livello attuale (profilo rilevato)
+INSERT INTO assessment (organizzazione_id, subcategory_cod, priorita, livello_target, livello_attuale, livello_maturita, data_valutazione) VALUES
+  (1, 'GV.OC-01', 'media', 3, 2, 2, DATE '2026-05-20'),
+  (1, 'GV.RM-01', 'alta', 3, 2, 2, DATE '2026-05-20'),
+  (1, 'GV.RR-02', 'media', 3, 2, 2, DATE '2026-05-20'),
+  (1, 'GV.SC-04', 'alta', 3, 3, 3, DATE '2026-05-20'),
+  (1, 'ID.AM-01', 'alta', 4, 2, 2, DATE '2026-05-20'),
+  (1, 'ID.AM-04', 'alta', 3, 2, 2, DATE '2026-05-20'),
+  (1, 'ID.RA-01', 'alta', 3, 2, 2, DATE '2026-05-20'),
+  (1, 'ID.RA-05', 'media', 3, 2, 2, DATE '2026-05-20'),
+  (1, 'PR.AA-01', 'alta', 4, 2, 2, DATE '2026-05-20'),
+  (1, 'PR.AA-05', 'alta', 3, 2, 2, DATE '2026-05-20'),
+  (1, 'PR.DS-01', 'media', 4, 3, 3, DATE '2026-05-20'),
+  (1, 'PR.IR-01', 'alta', 4, 4, 4, DATE '2026-05-20'),
+  (1, 'DE.CM-01', 'media', 3, 2, 2, DATE '2026-05-20'),
+  (1, 'DE.CM-09', 'media', 3, 2, 2, DATE '2026-05-20'),
+  (1, 'RS.MA-01', 'alta', 3, 3, 3, DATE '2026-05-20'),
+  (1, 'RS.CO-02', 'media', 3, 2, 2, DATE '2026-05-20'),
+  (1, 'RC.RP-01', 'media', 3, 2, 2, DATE '2026-05-20'),
+  (2, 'GV.OC-01', 'media', 3, 2, 2, DATE '2026-04-15'),
+  (2, 'GV.RM-01', 'alta', 3, 2, 2, DATE '2026-04-15'),
+  (2, 'GV.RR-02', 'media', 3, 3, 3, DATE '2026-04-15'),
+  (2, 'GV.SC-04', 'alta', 3, 2, 2, DATE '2026-04-15'),
+  (2, 'ID.AM-01', 'alta', 4, 4, 4, DATE '2026-04-15'),
+  (2, 'ID.AM-04', 'alta', 3, 2, 2, DATE '2026-04-15'),
+  (2, 'ID.RA-01', 'alta', 3, 2, 2, DATE '2026-04-15'),
+  (2, 'ID.RA-05', 'media', 3, 3, 3, DATE '2026-04-15'),
+  (2, 'PR.AA-01', 'alta', 4, 3, 3, DATE '2026-04-15'),
+  (2, 'PR.AA-05', 'alta', 3, 3, 3, DATE '2026-04-15'),
+  (2, 'PR.DS-01', 'media', 4, 3, 3, DATE '2026-04-15'),
+  (2, 'PR.IR-01', 'alta', 4, 3, 3, DATE '2026-04-15'),
+  (2, 'DE.CM-01', 'media', 3, 3, 3, DATE '2026-04-15'),
+  (2, 'DE.CM-09', 'media', 3, 2, 2, DATE '2026-04-15'),
+  (2, 'RS.MA-01', 'alta', 3, 3, 3, DATE '2026-04-15'),
+  (2, 'RS.CO-02', 'media', 3, 2, 2, DATE '2026-04-15'),
+  (2, 'RC.RP-01', 'media', 3, 3, 3, DATE '2026-04-15'),
+  (3, 'GV.OC-01', 'media', 3, 2, 2, DATE '2026-06-02'),
+  (3, 'GV.RM-01', 'alta', 3, 3, 3, DATE '2026-06-02'),
+  (3, 'GV.RR-02', 'media', 3, 2, 2, DATE '2026-06-02'),
+  (3, 'GV.SC-04', 'alta', 3, 3, 3, DATE '2026-06-02'),
+  (3, 'ID.AM-01', 'alta', 4, 3, 3, DATE '2026-06-02'),
+  (3, 'ID.AM-04', 'alta', 3, 3, 3, DATE '2026-06-02'),
+  (3, 'ID.RA-01', 'alta', 3, 2, 2, DATE '2026-06-02'),
+  (3, 'ID.RA-05', 'media', 3, 3, 3, DATE '2026-06-02'),
+  (3, 'PR.AA-01', 'alta', 4, 3, 3, DATE '2026-06-02'),
+  (3, 'PR.AA-05', 'alta', 3, 3, 3, DATE '2026-06-02'),
+  (3, 'PR.DS-01', 'media', 4, 3, 3, DATE '2026-06-02'),
+  (3, 'PR.IR-01', 'alta', 4, 4, 4, DATE '2026-06-02'),
+  (3, 'DE.CM-01', 'media', 3, 2, 2, DATE '2026-06-02'),
+  (3, 'DE.CM-09', 'media', 3, 3, 3, DATE '2026-06-02'),
+  (3, 'RS.MA-01', 'alta', 3, 2, 2, DATE '2026-06-02'),
+  (3, 'RS.CO-02', 'media', 3, 3, 3, DATE '2026-06-02'),
+  (3, 'RC.RP-01', 'media', 3, 2, 2, DATE '2026-06-02'),
+  (4, 'GV.OC-01', 'media', 3, 1, 1, DATE '2026-03-10'),
+  (4, 'GV.RM-01', 'alta', 3, 0, 0, DATE '2026-03-10'),
+  (4, 'GV.RR-02', 'media', 3, 1, 1, DATE '2026-03-10'),
+  (4, 'GV.SC-04', 'alta', 3, 0, 0, DATE '2026-03-10'),
+  (4, 'ID.AM-01', 'alta', 4, 1, 1, DATE '2026-03-10'),
+  (4, 'ID.AM-04', 'alta', 3, 1, 1, DATE '2026-03-10'),
+  (4, 'ID.RA-01', 'alta', 3, 0, 0, DATE '2026-03-10'),
+  (4, 'ID.RA-05', 'media', 3, 1, 1, DATE '2026-03-10'),
+  (4, 'PR.AA-01', 'alta', 4, 1, 1, DATE '2026-03-10'),
+  (4, 'PR.AA-05', 'alta', 3, 1, 1, DATE '2026-03-10'),
+  (4, 'PR.DS-01', 'media', 4, 1, 1, DATE '2026-03-10'),
+  (4, 'PR.IR-01', 'alta', 4, 1, 1, DATE '2026-03-10'),
+  (4, 'DE.CM-01', 'media', 3, 1, 1, DATE '2026-03-10'),
+  (4, 'DE.CM-09', 'media', 3, 1, 1, DATE '2026-03-10'),
+  (4, 'RS.MA-01', 'alta', 3, 0, 0, DATE '2026-03-10'),
+  (4, 'RS.CO-02', 'media', 3, 1, 1, DATE '2026-03-10'),
+  (4, 'RC.RP-01', 'media', 3, 0, 0, DATE '2026-03-10'),
+  (5, 'GV.OC-01', 'media', 3, 3, 3, DATE '2026-06-18'),
+  (5, 'GV.RM-01', 'alta', 3, 3, 3, DATE '2026-06-18'),
+  (5, 'GV.RR-02', 'media', 3, 2, 2, DATE '2026-06-18'),
+  (5, 'GV.SC-04', 'alta', 3, 3, 3, DATE '2026-06-18'),
+  (5, 'ID.AM-01', 'alta', 4, 4, 4, DATE '2026-06-18'),
+  (5, 'ID.AM-04', 'alta', 3, 3, 3, DATE '2026-06-18'),
+  (5, 'ID.RA-01', 'alta', 3, 2, 2, DATE '2026-06-18'),
+  (5, 'ID.RA-05', 'media', 3, 3, 3, DATE '2026-06-18'),
+  (5, 'PR.AA-01', 'alta', 4, 4, 4, DATE '2026-06-18'),
+  (5, 'PR.AA-05', 'alta', 3, 2, 2, DATE '2026-06-18'),
+  (5, 'PR.DS-01', 'media', 4, 4, 4, DATE '2026-06-18'),
+  (5, 'PR.IR-01', 'alta', 4, 4, 4, DATE '2026-06-18'),
+  (5, 'DE.CM-01', 'media', 3, 2, 2, DATE '2026-06-18'),
+  (5, 'DE.CM-09', 'media', 3, 3, 3, DATE '2026-06-18'),
+  (5, 'RS.MA-01', 'alta', 3, 3, 3, DATE '2026-06-18'),
+  (5, 'RS.CO-02', 'media', 3, 3, 3, DATE '2026-06-18'),
+  (5, 'RC.RP-01', 'media', 3, 2, 2, DATE '2026-06-18');
+
+
+-- ============================================================
 -- RESET SEQUENZE (allinea i contatori ai MAX degli id inseriti)
 -- ============================================================
 SELECT setval(pg_get_serial_sequence('organizzazione',   'id'), MAX(id)) FROM organizzazione;
@@ -781,6 +919,7 @@ SELECT setval(pg_get_serial_sequence('responsabilita',   'id'), MAX(id)) FROM re
 SELECT setval(pg_get_serial_sequence('asset_storico',    'id'), MAX(id)) FROM asset_storico;
 SELECT setval(pg_get_serial_sequence('misura_sicurezza', 'id'), MAX(id)) FROM misura_sicurezza;
 SELECT setval(pg_get_serial_sequence('profilo_acn',      'id'), MAX(id)) FROM profilo_acn;
+SELECT setval(pg_get_serial_sequence('assessment',       'id'), MAX(id)) FROM assessment;
 
 
 COMMIT;

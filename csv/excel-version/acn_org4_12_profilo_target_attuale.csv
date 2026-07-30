@@ -1,0 +1,18 @@
+funzione;funzione_nome;subcategory_cod;categoria_nome;descrizione;priorita;livello_target;livello_attuale;livello_maturita;data_valutazione
+GV;Governare;GV.OC-01;Contesto organizzativo;La missione dell'organizzazione è compresa e informa la gestione del rischio di cybersecurity.;media;3;1;1;10/03/2026
+GV;Governare;GV.RM-01;Strategia di gestione del rischio;Gli obiettivi di gestione del rischio sono stabiliti e accettati dagli stakeholder dell'organizzazione.;alta;3;0;0;10/03/2026
+GV;Governare;GV.RR-02;Ruoli, responsabilità e correlati poteri;I ruoli, le responsabilità e i correlati poteri relativi alla gestione del rischio di cybersecurity sono stabiliti, comunicati, compresi e applicati.;media;3;1;1;10/03/2026
+GV;Governare;GV.SC-04;Gestione del rischio di cybersecurity della catena di approvvigionamento;I fornitori sono noti e prioritizzati in base alla criticità.;alta;3;0;0;10/03/2026
+ID;Identificare;ID.AM-01;Gestione degli asset;Sono mantenuti gli inventari dell'hardware gestito dall'organizzazione.;alta;4;1;1;10/03/2026
+ID;Identificare;ID.AM-04;Gestione degli asset;Sono mantenuti gli inventari dei servizi erogati dai fornitori.;alta;3;1;1;10/03/2026
+ID;Identificare;ID.RA-01;Valutazione del rischio (Risk Assessment);Le vulnerabilità negli asset sono identificate, confermate e registrate.;alta;3;0;0;10/03/2026
+ID;Identificare;ID.RA-05;Valutazione del rischio (Risk Assessment);Minacce, vulnerabilità, probabilità e impatti sono utilizzati per comprendere il rischio inerente e per informare la prioritizzazione della risposta al rischio.;media;3;1;1;10/03/2026
+PR;Proteggere;PR.AA-01;Gestione delle identità, autenticazione e controllo degli accessi;Le identità e le credenziali degli utenti, dei servizi e dell'hardware autorizzati sono gestite dall'organizzazione.;alta;4;1;1;10/03/2026
+PR;Proteggere;PR.AA-05;Gestione delle identità, autenticazione e controllo degli accessi;I permessi, i diritti e le autorizzazioni di accesso sono definiti in una politica, gestiti, applicati e rivisti e incorporano i principi del minimo privilegio e della separazione dei compiti.;alta;3;1;1;10/03/2026
+PR;Proteggere;PR.DS-01;Sicurezza dei dati;La riservatezza, l'integrità e la disponibilità dei dati a riposo (data-at-rest) sono protette.;media;4;1;1;10/03/2026
+PR;Proteggere;PR.IR-01;Resilienza dell'infrastruttura tecnologica;Le reti e gli ambienti sono protetti dall'accesso logico e dall'uso non autorizzati.;alta;4;1;1;10/03/2026
+DE;Rilevare;DE.CM-01;Monitoraggio continuo;Le reti e i servizi di rete sono monitorati per individuare eventi potenzialmente avversi.;media;3;1;1;10/03/2026
+DE;Rilevare;DE.CM-09;Monitoraggio continuo;L'hardware e il software di elaborazione, gli ambienti di runtime e i loro dati sono monitorati per individuare eventi potenzialmente avversi.;media;3;1;1;10/03/2026
+RS;Rispondere;RS.CO-02;Segnalazione e comunicazione della risposta agli incidenti;Gli stakeholder interni ed esterni sono informati degli incidenti.;media;3;1;1;10/03/2026
+RS;Rispondere;RS.MA-01;Gestione degli incidenti;Il piano di risposta agli incidenti è eseguito in coordinamento con le terze parti interessate una volta dichiarato un incidente.;alta;3;0;0;10/03/2026
+RC;Ripristinare;RC.RP-01;Esecuzione del piano di ripristino dagli incidenti;La parte del piano di risposta agli incidenti relativa al rispristino viene eseguita una volta avviata dal processo di risposta agli incidenti.;media;3;0;0;10/03/2026

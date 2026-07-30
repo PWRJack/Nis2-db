@@ -1,0 +1,7 @@
+codice_inventario;nome_asset;tipo_asset;categoria_nis2_tipo;categoria_asset;stato;indirizzo_ip;versione_software;sede;citta;proprietario;email_proprietario;ruolo_proprietario;n_servizi_supportati;servizi_supportati;n_dipendenze_critiche;data_inserimento;ultimo_aggiornamento
+INV-BM-001;Core Banking Server Primario;Server fisico on-premise;Infrastruttura ICT;critico;attivo;10.10.1.10;IBM z/OS 3.1;Sede Direzionale;Genova;Gallo Elena;e.gallo@bancametro.it;CISO;1;Core Banking e Transazioni;1;30/07/2026;30/07/2026
+INV-BM-002;DB Transazioni OLTP;DBMS / sistema di gestione database;Software;critico;attivo;10.10.1.20;IBM Db2 12.1;Sede Direzionale;Genova;;;;1;Core Banking e Transazioni;1;30/07/2026;30/07/2026
+INV-BM-005;HSM — Hardware Security Module nShield;Asset fisico (edificio, generatore, UPS, ecc.);Fisico;critico;attivo;;Thales nShield FW 12.80;Sede Direzionale;Genova;;;;0;;1;30/07/2026;30/07/2026
+INV-BM-004;Rete SWIFT Interbancaria;Apparato di rete (switch, router, firewall, IPS);Rete;critico;attivo;10.10.0.1;SWIFT Alliance Access 7.4;Sede Direzionale;Genova;;;;0;;1;30/07/2026;30/07/2026
+INV-BM-003;Sistema PSD2 Open Banking;Applicazione software (web, desktop, mobile);Software;critico;attivo;10.10.2.10;OpenBankProject 4.2 / PSD2 2.0;Filiale Principale;Milano;;;;1;Open Banking PSD2;0;30/07/2026;30/07/2026
+INV-BM-006;Sistema Antifrode Real-Time;Applicazione software (web, desktop, mobile);Software;importante;attivo;10.10.2.20;FICO Falcon 9.1;Filiale Principale;Milano;;;;0;;0;30/07/2026;30/07/2026

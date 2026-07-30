@@ -1,0 +1,5 @@
+tipo_gap;codice_inventario;asset;tipo_asset;categoria;stato;sede;citta;stato_copertura;inserito_il
+GAP - Nessun proprietario;INV-OR-004;CCE — Cartella Clinica Elettronica;Applicazione software (web, desktop, mobile);critico;attivo;Presidio Ospedaliero;Bergamo;Nessun referente;30/07/2026
+GAP - Nessun proprietario;INV-OR-003;DB Pazienti e Cartelle Cliniche;DBMS / sistema di gestione database;critico;attivo;CED Ospedaliero;Bergamo;Ha altri ruoli assegnati;30/07/2026
+GAP - Nessun proprietario;INV-OR-006;Dispositivi IoMT (Infusori, Monitor Pz.);Sistema OT / ICS / SCADA / PLC;importante;attivo;Presidio Ospedaliero;Bergamo;Nessun referente;30/07/2026
+GAP - Nessun proprietario;INV-OR-005;Rete Medica Segregata VLAN-100;Apparato di rete (switch, router, firewall, IPS);importante;attivo;Presidio Ospedaliero;Bergamo;Nessun referente;30/07/2026

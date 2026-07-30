@@ -13,7 +13,7 @@
 --   * Codifica UTF-8: in Excel usare Dati > Da testo/CSV (origine 65001).
 --
 -- ============================================================
--- INDICE DELLE 11 ESTRAZIONI (prodotte per ogni organizzazione)
+-- INDICE DELLE 13 ESTRAZIONI (prodotte per ogni organizzazione)
 -- ============================================================
 --   01  anagrafica                       Anagrafica del soggetto NIS2 e referente ACN principale
 --   02  referenti                        Elenco dei referenti e contatti dell'organizzazione
@@ -26,8 +26,11 @@
 --   09  gap_asset_senza_proprietario     Asset critici/importanti privi di proprietario assegnato
 --   10  gap_misure                       Misure non ancora implementate (pianificate o in corso)
 --   11  storico_modifiche                Storico delle modifiche agli asset (audit trail)
+--   12  profilo_target_attuale           Profilo target e profilo attuale per Subcategory (FNCSDP)
+--   13  gap_analysis                     Gap analysis: divario target/attuale ordinato per priorita'
 --
--- Piu' un file riepilogativo comune: acn_dashboard_multiorg.csv
+-- Piu' due file riepilogativi comuni: acn_dashboard_multiorg.csv e
+-- acn_gap_dashboard_multiorg.csv
 --
 -- ORGANIZZAZIONI ESPORTATE:
 --   org 1 = Alfa Energia S.p.A.      (Energia)
@@ -79,6 +82,12 @@
 -- 11  Storico delle modifiche agli asset (audit trail)
 \copy (SELECT TO_CHAR(ast.modificato_il,'DD/MM/YYYY HH24:MI') AS data_ora, a.codice_inventario, a.nome AS asset, ta.descrizione AS tipo_asset, ast.campo_modificato, ast.valore_precedente, ast.valore_nuovo, ast.modificato_da, COALESCE(ast.motivo,'-') AS motivo FROM asset_storico ast JOIN asset a ON a.id = ast.asset_id JOIN tipo_asset ta ON ta.codice = a.tipo_asset_cod WHERE a.organizzazione_id = 1 ORDER BY ast.modificato_il DESC) TO 'acn_org1_11_storico_modifiche.csv' WITH CSV HEADER DELIMITER ','
 
+-- 12  Profilo target e profilo attuale per Subcategory (FNCSDP)
+\copy (SELECT fs.funzione, fs.funzione_nome, a.subcategory_cod, fs.categoria_nome, fs.descrizione, a.priorita, a.livello_target, a.livello_attuale, a.livello_maturita, TO_CHAR(a.data_valutazione,'DD/MM/YYYY') AS data_valutazione FROM assessment a JOIN framework_subcategory fs ON fs.codice = a.subcategory_cod WHERE a.organizzazione_id = 1 ORDER BY CASE fs.funzione WHEN 'GV' THEN 1 WHEN 'ID' THEN 2 WHEN 'PR' THEN 3 WHEN 'DE' THEN 4 WHEN 'RS' THEN 5 ELSE 6 END, a.subcategory_cod) TO 'acn_org1_12_profilo_target_attuale.csv' WITH CSV HEADER DELIMITER ','
+
+-- 13  Gap analysis: divario target/attuale ordinato per priorita'
+\copy (SELECT fs.funzione, a.subcategory_cod, fs.descrizione, a.priorita, a.livello_target, a.livello_attuale, (a.livello_target - a.livello_attuale) AS gap, CASE WHEN a.livello_attuale >= a.livello_target THEN 'Raggiunto' ELSE 'Da colmare' END AS stato FROM assessment a JOIN framework_subcategory fs ON fs.codice = a.subcategory_cod WHERE a.organizzazione_id = 1 ORDER BY CASE a.priorita WHEN 'alta' THEN 1 WHEN 'media' THEN 2 ELSE 3 END, (a.livello_target - a.livello_attuale) DESC, a.subcategory_cod) TO 'acn_org1_13_gap_analysis.csv' WITH CSV HEADER DELIMITER ','
+
 
 -- ============================================================
 --  ORGANIZZAZIONE 2 :  BetaCloud S.r.l.  -  settore Infrastrutture digitali
@@ -118,6 +127,12 @@
 
 -- 11  Storico delle modifiche agli asset (audit trail)
 \copy (SELECT TO_CHAR(ast.modificato_il,'DD/MM/YYYY HH24:MI') AS data_ora, a.codice_inventario, a.nome AS asset, ta.descrizione AS tipo_asset, ast.campo_modificato, ast.valore_precedente, ast.valore_nuovo, ast.modificato_da, COALESCE(ast.motivo,'-') AS motivo FROM asset_storico ast JOIN asset a ON a.id = ast.asset_id JOIN tipo_asset ta ON ta.codice = a.tipo_asset_cod WHERE a.organizzazione_id = 2 ORDER BY ast.modificato_il DESC) TO 'acn_org2_11_storico_modifiche.csv' WITH CSV HEADER DELIMITER ','
+
+-- 12  Profilo target e profilo attuale per Subcategory (FNCSDP)
+\copy (SELECT fs.funzione, fs.funzione_nome, a.subcategory_cod, fs.categoria_nome, fs.descrizione, a.priorita, a.livello_target, a.livello_attuale, a.livello_maturita, TO_CHAR(a.data_valutazione,'DD/MM/YYYY') AS data_valutazione FROM assessment a JOIN framework_subcategory fs ON fs.codice = a.subcategory_cod WHERE a.organizzazione_id = 2 ORDER BY CASE fs.funzione WHEN 'GV' THEN 1 WHEN 'ID' THEN 2 WHEN 'PR' THEN 3 WHEN 'DE' THEN 4 WHEN 'RS' THEN 5 ELSE 6 END, a.subcategory_cod) TO 'acn_org2_12_profilo_target_attuale.csv' WITH CSV HEADER DELIMITER ','
+
+-- 13  Gap analysis: divario target/attuale ordinato per priorita'
+\copy (SELECT fs.funzione, a.subcategory_cod, fs.descrizione, a.priorita, a.livello_target, a.livello_attuale, (a.livello_target - a.livello_attuale) AS gap, CASE WHEN a.livello_attuale >= a.livello_target THEN 'Raggiunto' ELSE 'Da colmare' END AS stato FROM assessment a JOIN framework_subcategory fs ON fs.codice = a.subcategory_cod WHERE a.organizzazione_id = 2 ORDER BY CASE a.priorita WHEN 'alta' THEN 1 WHEN 'media' THEN 2 ELSE 3 END, (a.livello_target - a.livello_attuale) DESC, a.subcategory_cod) TO 'acn_org2_13_gap_analysis.csv' WITH CSV HEADER DELIMITER ','
 
 
 -- ============================================================
@@ -159,6 +174,12 @@
 -- 11  Storico delle modifiche agli asset (audit trail)
 \copy (SELECT TO_CHAR(ast.modificato_il,'DD/MM/YYYY HH24:MI') AS data_ora, a.codice_inventario, a.nome AS asset, ta.descrizione AS tipo_asset, ast.campo_modificato, ast.valore_precedente, ast.valore_nuovo, ast.modificato_da, COALESCE(ast.motivo,'-') AS motivo FROM asset_storico ast JOIN asset a ON a.id = ast.asset_id JOIN tipo_asset ta ON ta.codice = a.tipo_asset_cod WHERE a.organizzazione_id = 3 ORDER BY ast.modificato_il DESC) TO 'acn_org3_11_storico_modifiche.csv' WITH CSV HEADER DELIMITER ','
 
+-- 12  Profilo target e profilo attuale per Subcategory (FNCSDP)
+\copy (SELECT fs.funzione, fs.funzione_nome, a.subcategory_cod, fs.categoria_nome, fs.descrizione, a.priorita, a.livello_target, a.livello_attuale, a.livello_maturita, TO_CHAR(a.data_valutazione,'DD/MM/YYYY') AS data_valutazione FROM assessment a JOIN framework_subcategory fs ON fs.codice = a.subcategory_cod WHERE a.organizzazione_id = 3 ORDER BY CASE fs.funzione WHEN 'GV' THEN 1 WHEN 'ID' THEN 2 WHEN 'PR' THEN 3 WHEN 'DE' THEN 4 WHEN 'RS' THEN 5 ELSE 6 END, a.subcategory_cod) TO 'acn_org3_12_profilo_target_attuale.csv' WITH CSV HEADER DELIMITER ','
+
+-- 13  Gap analysis: divario target/attuale ordinato per priorita'
+\copy (SELECT fs.funzione, a.subcategory_cod, fs.descrizione, a.priorita, a.livello_target, a.livello_attuale, (a.livello_target - a.livello_attuale) AS gap, CASE WHEN a.livello_attuale >= a.livello_target THEN 'Raggiunto' ELSE 'Da colmare' END AS stato FROM assessment a JOIN framework_subcategory fs ON fs.codice = a.subcategory_cod WHERE a.organizzazione_id = 3 ORDER BY CASE a.priorita WHEN 'alta' THEN 1 WHEN 'media' THEN 2 ELSE 3 END, (a.livello_target - a.livello_attuale) DESC, a.subcategory_cod) TO 'acn_org3_13_gap_analysis.csv' WITH CSV HEADER DELIMITER ','
+
 
 -- ============================================================
 --  ORGANIZZAZIONE 4 :  TransLogistica S.p.A.  -  settore Trasporti
@@ -198,6 +219,12 @@
 
 -- 11  Storico delle modifiche agli asset (audit trail)
 \copy (SELECT TO_CHAR(ast.modificato_il,'DD/MM/YYYY HH24:MI') AS data_ora, a.codice_inventario, a.nome AS asset, ta.descrizione AS tipo_asset, ast.campo_modificato, ast.valore_precedente, ast.valore_nuovo, ast.modificato_da, COALESCE(ast.motivo,'-') AS motivo FROM asset_storico ast JOIN asset a ON a.id = ast.asset_id JOIN tipo_asset ta ON ta.codice = a.tipo_asset_cod WHERE a.organizzazione_id = 4 ORDER BY ast.modificato_il DESC) TO 'acn_org4_11_storico_modifiche.csv' WITH CSV HEADER DELIMITER ','
+
+-- 12  Profilo target e profilo attuale per Subcategory (FNCSDP)
+\copy (SELECT fs.funzione, fs.funzione_nome, a.subcategory_cod, fs.categoria_nome, fs.descrizione, a.priorita, a.livello_target, a.livello_attuale, a.livello_maturita, TO_CHAR(a.data_valutazione,'DD/MM/YYYY') AS data_valutazione FROM assessment a JOIN framework_subcategory fs ON fs.codice = a.subcategory_cod WHERE a.organizzazione_id = 4 ORDER BY CASE fs.funzione WHEN 'GV' THEN 1 WHEN 'ID' THEN 2 WHEN 'PR' THEN 3 WHEN 'DE' THEN 4 WHEN 'RS' THEN 5 ELSE 6 END, a.subcategory_cod) TO 'acn_org4_12_profilo_target_attuale.csv' WITH CSV HEADER DELIMITER ','
+
+-- 13  Gap analysis: divario target/attuale ordinato per priorita'
+\copy (SELECT fs.funzione, a.subcategory_cod, fs.descrizione, a.priorita, a.livello_target, a.livello_attuale, (a.livello_target - a.livello_attuale) AS gap, CASE WHEN a.livello_attuale >= a.livello_target THEN 'Raggiunto' ELSE 'Da colmare' END AS stato FROM assessment a JOIN framework_subcategory fs ON fs.codice = a.subcategory_cod WHERE a.organizzazione_id = 4 ORDER BY CASE a.priorita WHEN 'alta' THEN 1 WHEN 'media' THEN 2 ELSE 3 END, (a.livello_target - a.livello_attuale) DESC, a.subcategory_cod) TO 'acn_org4_13_gap_analysis.csv' WITH CSV HEADER DELIMITER ','
 
 
 -- ============================================================
@@ -239,6 +266,12 @@
 -- 11  Storico delle modifiche agli asset (audit trail)
 \copy (SELECT TO_CHAR(ast.modificato_il,'DD/MM/YYYY HH24:MI') AS data_ora, a.codice_inventario, a.nome AS asset, ta.descrizione AS tipo_asset, ast.campo_modificato, ast.valore_precedente, ast.valore_nuovo, ast.modificato_da, COALESCE(ast.motivo,'-') AS motivo FROM asset_storico ast JOIN asset a ON a.id = ast.asset_id JOIN tipo_asset ta ON ta.codice = a.tipo_asset_cod WHERE a.organizzazione_id = 5 ORDER BY ast.modificato_il DESC) TO 'acn_org5_11_storico_modifiche.csv' WITH CSV HEADER DELIMITER ','
 
+-- 12  Profilo target e profilo attuale per Subcategory (FNCSDP)
+\copy (SELECT fs.funzione, fs.funzione_nome, a.subcategory_cod, fs.categoria_nome, fs.descrizione, a.priorita, a.livello_target, a.livello_attuale, a.livello_maturita, TO_CHAR(a.data_valutazione,'DD/MM/YYYY') AS data_valutazione FROM assessment a JOIN framework_subcategory fs ON fs.codice = a.subcategory_cod WHERE a.organizzazione_id = 5 ORDER BY CASE fs.funzione WHEN 'GV' THEN 1 WHEN 'ID' THEN 2 WHEN 'PR' THEN 3 WHEN 'DE' THEN 4 WHEN 'RS' THEN 5 ELSE 6 END, a.subcategory_cod) TO 'acn_org5_12_profilo_target_attuale.csv' WITH CSV HEADER DELIMITER ','
+
+-- 13  Gap analysis: divario target/attuale ordinato per priorita'
+\copy (SELECT fs.funzione, a.subcategory_cod, fs.descrizione, a.priorita, a.livello_target, a.livello_attuale, (a.livello_target - a.livello_attuale) AS gap, CASE WHEN a.livello_attuale >= a.livello_target THEN 'Raggiunto' ELSE 'Da colmare' END AS stato FROM assessment a JOIN framework_subcategory fs ON fs.codice = a.subcategory_cod WHERE a.organizzazione_id = 5 ORDER BY CASE a.priorita WHEN 'alta' THEN 1 WHEN 'media' THEN 2 ELSE 3 END, (a.livello_target - a.livello_attuale) DESC, a.subcategory_cod) TO 'acn_org5_13_gap_analysis.csv' WITH CSV HEADER DELIMITER ','
+
 
 -- ============================================================
 --  RIEPILOGO MULTI-ORGANIZZAZIONE (tutte le org in un unico file)
@@ -249,5 +282,8 @@
 -- Confronto sintetico tra tutte le organizzazioni registrate
 \copy (SELECT o.id AS org_id, o.nome AS organizzazione, o.settore_nis2, o.categoria_nis2, (SELECT COUNT(*) FROM asset a WHERE a.organizzazione_id=o.id AND a.categoria='critico' AND a.is_deleted=FALSE) AS asset_critici, (SELECT COUNT(*) FROM asset a WHERE a.organizzazione_id=o.id AND a.categoria='importante' AND a.is_deleted=FALSE) AS asset_importanti, (SELECT COUNT(*) FROM servizio sv WHERE sv.organizzazione_id=o.id AND sv.criticita='alta' AND sv.stato='attivo') AS servizi_alta_crit, (SELECT COUNT(*) FROM dipendenza d WHERE d.organizzazione_id=o.id AND d.criticita IN ('critica','alta') AND d.data_fine IS NULL) AS dip_critiche, (SELECT COUNT(DISTINCT d.fornitore_id) FROM dipendenza d JOIN fornitore f ON f.id=d.fornitore_id WHERE d.organizzazione_id=o.id AND f.is_fornitore_critico=TRUE AND d.data_fine IS NULL) AS fornitori_critici, ROUND(100.0 * (SELECT COUNT(*) FROM misura_sicurezza ms WHERE ms.organizzazione_id=o.id AND ms.stato_implementazione='implementata') / NULLIF((SELECT COUNT(*) FROM misura_sicurezza ms WHERE ms.organizzazione_id=o.id),0), 1) AS perc_misure_implementate, (SELECT COUNT(*) FROM contratto c WHERE c.organizzazione_id=o.id AND c.data_scadenza >= CURRENT_DATE AND c.data_scadenza <= CURRENT_DATE + INTERVAL '180 days') AS contratti_scadenza_180gg, (SELECT pa.stato FROM profilo_acn pa WHERE pa.organizzazione_id=o.id ORDER BY pa.versione DESC LIMIT 1) AS stato_profilo, (SELECT p.email FROM persona p WHERE p.organizzazione_id=o.id AND p.is_referente_acn=TRUE LIMIT 1) AS email_referente_acn FROM organizzazione o ORDER BY o.categoria_nis2, o.settore_nis2, o.nome) TO 'acn_dashboard_multiorg.csv' WITH CSV HEADER DELIMITER ','
 
+-- Sintesi dei gap per tutte le organizzazioni (completamento del profilo)
+\copy (SELECT o.id AS org_id, o.nome AS organizzazione, o.settore_nis2, o.categoria_nis2, COUNT(*) AS subcategory_valutate, COUNT(*) FILTER (WHERE a.livello_attuale >= a.livello_target) AS raggiunte, COUNT(*) FILTER (WHERE a.livello_attuale < a.livello_target) AS da_colmare, COUNT(*) FILTER (WHERE a.livello_attuale < a.livello_target AND a.priorita='alta') AS gap_priorita_alta, ROUND(AVG(a.livello_target - a.livello_attuale), 2) AS gap_medio, ROUND(100.0 * SUM(a.livello_attuale) / NULLIF(SUM(a.livello_target),0), 1) AS completamento_perc FROM assessment a JOIN organizzazione o ON o.id = a.organizzazione_id GROUP BY o.id, o.nome, o.settore_nis2, o.categoria_nis2 ORDER BY completamento_perc DESC) TO 'acn_gap_dashboard_multiorg.csv' WITH CSV HEADER DELIMITER ','
+
 \echo ''
-\echo 'Export completato: 56 file CSV generati nella cartella corrente.'
+\echo 'Export completato: 67 file CSV generati nella cartella corrente.'

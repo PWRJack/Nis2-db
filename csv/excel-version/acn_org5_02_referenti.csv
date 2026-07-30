@@ -1,0 +1,4 @@
+nominativo;email;telefono;ruolo;referente_acn_ufficiale;organizzazione;pec_organizzazione
+Mancini Giorgio;g.mancini@bancametro.it;+39 010 3322 001;Referente_ACN;Si;BancaMetro S.p.A.;bancametro@pec-banche.it
+Bruno Federico;f.bruno@bancametro.it;+39 010 3322 003;DPO;No;BancaMetro S.p.A.;bancametro@pec-banche.it
+Gallo Elena;e.gallo@bancametro.it;+39 010 3322 002;CISO;No;BancaMetro S.p.A.;bancametro@pec-banche.it

@@ -1,0 +1,4 @@
+nome_servizio;tipo_servizio;criticita;stato;rto_ore;rpo_ore;classe_disponibilita;url_servizio;n_asset_supportanti;asset_supportanti;proprietario;email_proprietario;n_dipendenze_critiche_fornitore
+Gestione Magazzino WMS;essenziale;alta;attivo;8;2;Business critical;;1;DB WMS Magazzino;;;1
+Tracking Flotta e Spedizioni;essenziale;alta;attivo;4;1;Missione critica;https://track.translogistica.it;2;Server Gestione Flotta | Sistema GPS Fleet Tracking;Romano Valentina;v.romano@translogistica.it;1
+Portale B2B Clienti Logistici;digitale;media;attivo;24;8;Business critical;https://business.translogistica.it;0;;;;0

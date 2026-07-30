@@ -1,0 +1,6 @@
+codice_inventario;nome_asset;tipo_asset;categoria_nis2_tipo;categoria_asset;stato;indirizzo_ip;versione_software;sede;citta;proprietario;email_proprietario;ruolo_proprietario;n_servizi_supportati;servizi_supportati;n_dipendenze_critiche;data_inserimento;ultimo_aggiornamento
+INV-BC-001;API Gateway Prod;Server virtuale / VM;Infrastruttura ICT;critico;attivo;10.1.0.5;Kong 3.4;Headquarters BetaCloud;Roma;Ricci Matteo;m.ricci@betacloud.it;CTO;1;API Management Service;0;30/07/2026;30/07/2026
+INV-BC-002;Cluster Kubernetes Prod;Server virtuale / VM;Infrastruttura ICT;critico;attivo;10.1.0.10;Kubernetes 1.29;Headquarters BetaCloud;Roma;Ricci Matteo;m.ricci@betacloud.it;CTO;1;Piattaforma Cloud B2B;1;30/07/2026;30/07/2026
+INV-BC-003;PostgreSQL Prod;DBMS / sistema di gestione database;Software;critico;attivo;10.1.1.5;PostgreSQL 16.1;Headquarters BetaCloud;Roma;;;;1;Piattaforma Cloud B2B;0;30/07/2026;30/07/2026
+INV-BC-005;Storage Dati Clienti S3;Dataset, archivio dati, Data Warehouse;Dato;critico;attivo;;;Headquarters BetaCloud;Roma;;;;1;Servizio Backup e DR;0;30/07/2026;30/07/2026
+INV-BC-004;CDN Load Balancer;Apparato di rete (switch, router, firewall, IPS);Rete;importante;attivo;10.1.0.1;Azure Front Door v2;Headquarters BetaCloud;Roma;;;;0;;0;30/07/2026;30/07/2026

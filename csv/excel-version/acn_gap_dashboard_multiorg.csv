@@ -1,0 +1,6 @@
+org_id;organizzazione;settore_nis2;categoria_nis2;subcategory_valutate;raggiunte;da_colmare;gap_priorita_alta;gap_medio;completamento_perc
+5;BancaMetro S.p.A.;Bancario;essenziale;17;12;5;2;0.29;90.9
+3;Ospedale Regionale Nord;Sanità;essenziale;17;8;9;4;0.53;83.6
+2;BetaCloud S.r.l.;Infrastrutture digitali;importante;17;7;10;6;0.59;81.8
+1;Alfa Energia S.p.A.;Energia;essenziale;17;3;14;6;0.94;70.9
+4;TransLogistica S.p.A.;Trasporti;essenziale;17;0;17;9;2.53;21.8

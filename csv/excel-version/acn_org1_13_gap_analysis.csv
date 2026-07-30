@@ -1,0 +1,18 @@
+funzione;subcategory_cod;descrizione;priorita;livello_target;livello_attuale;gap;stato
+ID;ID.AM-01;Sono mantenuti gli inventari dell'hardware gestito dall'organizzazione.;alta;4;2;2;Da colmare
+PR;PR.AA-01;Le identità e le credenziali degli utenti, dei servizi e dell'hardware autorizzati sono gestite dall'organizzazione.;alta;4;2;2;Da colmare
+GV;GV.RM-01;Gli obiettivi di gestione del rischio sono stabiliti e accettati dagli stakeholder dell'organizzazione.;alta;3;2;1;Da colmare
+ID;ID.AM-04;Sono mantenuti gli inventari dei servizi erogati dai fornitori.;alta;3;2;1;Da colmare
+ID;ID.RA-01;Le vulnerabilità negli asset sono identificate, confermate e registrate.;alta;3;2;1;Da colmare
+PR;PR.AA-05;I permessi, i diritti e le autorizzazioni di accesso sono definiti in una politica, gestiti, applicati e rivisti e incorporano i principi del minimo privilegio e della separazione dei compiti.;alta;3;2;1;Da colmare
+GV;GV.SC-04;I fornitori sono noti e prioritizzati in base alla criticità.;alta;3;3;0;Raggiunto
+PR;PR.IR-01;Le reti e gli ambienti sono protetti dall'accesso logico e dall'uso non autorizzati.;alta;4;4;0;Raggiunto
+RS;RS.MA-01;Il piano di risposta agli incidenti è eseguito in coordinamento con le terze parti interessate una volta dichiarato un incidente.;alta;3;3;0;Raggiunto
+DE;DE.CM-01;Le reti e i servizi di rete sono monitorati per individuare eventi potenzialmente avversi.;media;3;2;1;Da colmare
+DE;DE.CM-09;L'hardware e il software di elaborazione, gli ambienti di runtime e i loro dati sono monitorati per individuare eventi potenzialmente avversi.;media;3;2;1;Da colmare
+GV;GV.OC-01;La missione dell'organizzazione è compresa e informa la gestione del rischio di cybersecurity.;media;3;2;1;Da colmare
+GV;GV.RR-02;I ruoli, le responsabilità e i correlati poteri relativi alla gestione del rischio di cybersecurity sono stabiliti, comunicati, compresi e applicati.;media;3;2;1;Da colmare
+ID;ID.RA-05;Minacce, vulnerabilità, probabilità e impatti sono utilizzati per comprendere il rischio inerente e per informare la prioritizzazione della risposta al rischio.;media;3;2;1;Da colmare
+PR;PR.DS-01;La riservatezza, l'integrità e la disponibilità dei dati a riposo (data-at-rest) sono protette.;media;4;3;1;Da colmare
+RC;RC.RP-01;La parte del piano di risposta agli incidenti relativa al rispristino viene eseguita una volta avviata dal processo di risposta agli incidenti.;media;3;2;1;Da colmare
+RS;RS.CO-02;Gli stakeholder interni ed esterni sono informati degli incidenti.;media;3;2;1;Da colmare

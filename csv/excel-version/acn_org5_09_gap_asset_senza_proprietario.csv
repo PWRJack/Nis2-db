@@ -1,0 +1,6 @@
+tipo_gap;codice_inventario;asset;tipo_asset;categoria;stato;sede;citta;stato_copertura;inserito_il
+GAP - Nessun proprietario;INV-BM-002;DB Transazioni OLTP;DBMS / sistema di gestione database;critico;attivo;Sede Direzionale;Genova;Nessun referente;30/07/2026
+GAP - Nessun proprietario;INV-BM-005;HSM — Hardware Security Module nShield;Asset fisico (edificio, generatore, UPS, ecc.);critico;attivo;Sede Direzionale;Genova;Nessun referente;30/07/2026
+GAP - Nessun proprietario;INV-BM-004;Rete SWIFT Interbancaria;Apparato di rete (switch, router, firewall, IPS);critico;attivo;Sede Direzionale;Genova;Nessun referente;30/07/2026
+GAP - Nessun proprietario;INV-BM-003;Sistema PSD2 Open Banking;Applicazione software (web, desktop, mobile);critico;attivo;Filiale Principale;Milano;Nessun referente;30/07/2026
+GAP - Nessun proprietario;INV-BM-006;Sistema Antifrode Real-Time;Applicazione software (web, desktop, mobile);importante;attivo;Filiale Principale;Milano;Nessun referente;30/07/2026

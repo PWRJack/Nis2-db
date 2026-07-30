@@ -1,0 +1,4 @@
+tipo_gap;codice_inventario;asset;tipo_asset;categoria;stato;sede;citta;stato_copertura;inserito_il
+GAP - Nessun proprietario;INV-BC-003;PostgreSQL Prod;DBMS / sistema di gestione database;critico;attivo;Headquarters BetaCloud;Roma;Nessun referente;30/07/2026
+GAP - Nessun proprietario;INV-BC-005;Storage Dati Clienti S3;Dataset, archivio dati, Data Warehouse;critico;attivo;Headquarters BetaCloud;Roma;Nessun referente;30/07/2026
+GAP - Nessun proprietario;INV-BC-004;CDN Load Balancer;Apparato di rete (switch, router, firewall, IPS);importante;attivo;Headquarters BetaCloud;Roma;Nessun referente;30/07/2026
